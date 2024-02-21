@@ -121,3 +121,5 @@ Just click the button and say the desired command. The command will execute in f
     </tr>
 </table>
 
+[Video](https://youtu.be/A26lvR3nOL4) [Presentation](presentation.pdf)
+
