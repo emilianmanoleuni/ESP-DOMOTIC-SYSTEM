@@ -51,8 +51,6 @@ For the main ESP:
 2. Select the board "ESP32 dev module"
 3. Go to **File** > **Open** and select the .ino file
 
-To import the libraries: 
-///
 
 For the second ESP: 
 1. Open Arduino IDE2.x
@@ -68,7 +66,9 @@ For the second ESP:
  * If you want to turn or/off lights the command is "_ROOM_ + LIGHTS + ON/OFF"
  * If you want to turn or/off the fan the command is "FAN + ON/OFF"
 
-   > Available rooms: LIVING ROOM, KITCHEN, BATHROOM, BEDROOM
+> Available rooms: LIVING ROOM, KITCHEN, BATHROOM, BEDROOM
+
+Just click the button, say the desired command and leave the button. The command will execute in a few seconds
 
 ## Contributors
 
