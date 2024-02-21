@@ -1,5 +1,5 @@
 # ESP DOMOTIC SYSTEM
-ESP Domotic System is a simple domotic system to control sensors and domotic items of a small house. It is associated to a web app that allows to check real-time graphs of power consumption and sensor readings. The web app also allows to turn on and off domotic items such as lights or fans. This project exploits the concept of embedded systems to simplify control of a small house.
+ESP Domotic System is a simple domotic system to control sensors and domotic items of a small house. It is associated to a web app that allows to check real-time graphs of power consumption and sensor readings. The web app also allows to turn on and off domotic items such as lights or fans. This project exploits the concept of embedded systems to simplify control of a small house. It also offers the possibility to give several voice commands through a voice model, for example to turn on or off lights.
 ### Schematic
 
  <p>
