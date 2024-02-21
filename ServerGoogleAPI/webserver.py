@@ -2,7 +2,8 @@ from google.cloud import speech_v1p1beta1 as speech
 from flask import Flask, request, jsonify, make_response
 import os
 
-# Codice del server Flask qui...
+
+# Codice del server Flask qui...   
 
 app = Flask(__name__)
 file_name = "./resources/recording.wav"
