@@ -19,6 +19,7 @@ You will need [Code Composer Studio](https://www.ti.com/tool/CCSTUDIO) installed
 
 ## Project Layout
 
+```
 ├── esp_main                
 │   ├── esp_main_code        # main code to be run on the main esp
 │   ├── esp_main_data        # data of the web server held on the esp
@@ -26,7 +27,8 @@ You will need [Code Composer Studio](https://www.ti.com/tool/CCSTUDIO) installed
 │   ├── ...
 │   ├── ...
 ├── msp432                   # project to be imported in CodeComposerStudio
-├── house_model              # 3D model to print house model anb brackets for components 
+├── house_model              # 3D model to print house model anb brackets for components
+```
 
 ## Build and Run the project
 
