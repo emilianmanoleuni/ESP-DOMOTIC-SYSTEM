@@ -67,7 +67,11 @@ For the second ESP:
 ## User Guide 
  After the connections are ready and the boards are powered, wait that the blue led on the main ESP turn on. This means that the server is ready and you can proceed accessing the web app.
  To do so, open the Arduino console and read the main ESP IP address, copy it into your browser (pay attention to be connected at the same WiFi of the board) and this page will show up:
- <p align = "center"> <img src = ""></p>
+ <p align = "center"> <img src = "screenshoot_web_page/screenshoot_home_top.png" width = "500px"></p>
+
+ You can use those buttons to turn on/off lights and fan. When the blue is bright it means the power is on, otherwise it's off. Scrolling down you will see the graphs, that monitors all the sensors and power supplies of the sistem.
+
+ <p align = "center"> <img src = "screenshoot_web_page/screenshoot_home_graphs.png" width = "500px"> </p>
 
  You can also use a various set of voice command, composed in this way:
  * If you want to turn or/off lights the command is "_ROOM_ + LIGHTS + ON/OFF"
