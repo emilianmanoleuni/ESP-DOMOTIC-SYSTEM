@@ -54,10 +54,21 @@ For the main ESP:
 To import the libraries: 
 ///
 
+For the second ESP: 
+1. Open Arduino IDE2.x
+2. Select the board "ESP32 dev module"
+3. Go to **File** > **Open** and select the .ino file
+
+> Be sure that the GoogleServerAPI directory is in the same directory as the project and don't rename any file
+
 ## User Guide 
  // how to connect to the web app
 
- // pre-imposted voice command
+ You can also use a various set of voice command, composed in this way:
+ * If you want to turn or/off lights the command is "_ROOM_ + LIGHTS + ON/OFF"
+ * If you want to turn or/off the fan the command is "FAN + ON/OFF"
+
+   > Available rooms: LIVING ROOM, KITCHEN, BATHROOM, BEDROOM
 
 ## Contributors
 
