@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <HardwareSerial.h>
 #include "esp_uart.h"
-//#include "fan.h"
 
 extern float temperature;
 extern int light;
@@ -13,20 +12,8 @@ void UARTinit(){
 }
 
 int  getData(){
-	while(!SerialPort.available());
+	while(!SerialPort.available()); //trap the MCU until a data is available in the UART channel
 	return SerialPort.read();
-}
-
-void handleData(){
-	int data = getData();
-	switch(data){
-		case 0:
-			readTemperature(); break;
-		case 1:
-			readLight(); break;
-		default: 
-			return; 
-	}
 }
 
 void sendWithInterrupt(int data){
@@ -34,29 +21,24 @@ void sendWithInterrupt(int data){
 }
 
 float readTemperature(){
-  temperature = 0;
-  getData();            //waiting for start bit
-  while(1){
-    int data = getData();
-    if(data==0) break; //two cases: or the temperature is 0, or the sending is over
-    temperature+=data;
-  }
-  
-  temperature=(float) (temperature)/10.0;
-  //updateFanStatus(temperature);
-  Serial.println(temperature);
-  return temperature;
+    temperature = 0;
+    getData();                 //waiting for start bit
+    while(1){
+        int data = getData();
+        if(data==0) break;     //two cases: or the temperature is 0, or the sending is over
+        temperature+=data;
+    }
+    temperature=(float) (temperature)/10.0;
+    return temperature;
 }
 
 int readLight(){
-  light = 0;
-  getData();            //waiting for start bit
-	while(1){
-    int data = getData();
-    if(data==0) break;
-    light+=data;
-  }
-  Serial.println(light);
-  return light;
-  
+    light = 0;
+    getData();                 //waiting for start bit
+    while(1){
+    	int data = getData();
+    	if(data==0) break;
+    	light+=data;
+    }
+    return light;
 }
