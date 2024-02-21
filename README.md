@@ -66,8 +66,8 @@ For the second ESP:
 
 When you have uploaded and verified both projects, you can upload them on each board by clicking the arrow in Arduino IDE.
 To upload the data directory into the memory of the main ESP, you need to use a file system. In this case we use the integrated LittleFS.
-<p><img src="screenshoot_web_page/first_littlefs" width = "300px"></p>
-<p><img src="screenshoot_web_page/second_littlefs" width = "300px"></p>
+<p><img src="screenshoot_web_page/first_littlefs.jpg" width = "300px"></p>
+<p><img src="screenshoot_web_page/second_littlefs.jpg" width = "300px"></p>
 
 ## User Guide 
  After the connections are ready and the boards are powered, wait that the blue led on the main ESP turn on. This means that the server is ready and you can proceed accessing the web app.
