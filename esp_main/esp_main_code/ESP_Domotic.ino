@@ -23,8 +23,8 @@ int PIN_5V = 32;
 int PIN_PHOTOVOLTAIC = 33;
 
 // Replace with your network credentials
-const char* ssid = "iliadbox-10271E";
-const char* password = "!Nicoletta22012002";
+const char* ssid = "";
+const char* password = "";
 
 
 // Create AsyncWebServer object on port 80
