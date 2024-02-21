@@ -1,0 +1,331 @@
+body {
+  background-image: url("http://192.168.1.192/background.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  -background-color: #ccebff;
+}
+
+h1 {
+  font-family: 'Courier New', monospace;
+  font-size: 2.5rem;
+  text-align: center;
+  color: #ffffff;
+  text-shadow: -1.5px 0 #4d4d4d, 0 1.5px #4d4d4d, 1.5px 0 #4d4d4d, 0 -1.5px #4d4d4d;
+}
+
+h2 {
+  font-family: 'Courier New', monospace;
+  font-size: 1.75rem;
+  text-align: center;
+  margin: 0px;
+  padding-top: 10px;
+}
+
+h3{
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  text-align: center;
+}
+
+p.readings{
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  text-align: center;
+}
+
+p.bottom {
+  color: #ffffff;
+  margin: auto;
+  margin-top: 8px;
+}
+
+div.topBar{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    margin: -100px 0 0 -600px;
+    background-color: #ffffff;
+    width: 1195px;
+    height: 30px;
+    display: inline-block;
+    border-style: groove;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+div.main {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  margin: -100px 0 0 -600px;
+  width: 1200px;
+  height: 2000px;
+}
+
+div.top{
+  display: flex;
+  flex-direction: row;
+  width: 1200px;
+  height: 500px;
+  margin-bottom: 15px;
+}
+
+div.topLeft {
+  background-color: #ffffff;
+  display: inline-block;
+  width: 960px;
+  height: 100%;
+  border-style: groove;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+div.topLeftHouseButtonsTitle{
+  width: 100%;
+  height: 10%;
+}
+
+div.topLeftHouseButtons{
+  display: inline-block;
+  background-image: url("http://192.168.1.192/casa_grafica.png");
+  width: 100%;
+  height: 90%;
+  background-size: 90%;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+
+div.topRight {
+  background-color: #ffffff;
+  display: inline-block;
+  width: 240px;
+  height: 100%;
+  border-style: groove;
+  border-radius: 5px;
+}
+
+div.topRightButtonFirstTitle{
+  width: 100%;
+  height: 10%;
+}
+
+div.topRightButtonFirst{
+  width: 100%;
+  height: 40%;
+}
+
+div.readings{
+  background-color: #ffffff;
+  border-style: groove;
+  border-radius: 5px;
+  width: 1195px;
+  height: 160px;
+  margin-bottom: 15px;
+}
+
+div.readingsBox{
+  display: flex;
+  width: 100%;
+  height: 90px;
+  margin-top: 20px;
+}
+
+div.firstReading{
+  display: inline-flex;
+  height: 90px;
+  width: 16%;
+  margin-left: 12px;
+}
+
+div.secondReading{
+  display: inline-flex;
+  height: 90px;
+  width: 16%;
+}
+
+div.thirdReading{
+  display: inline-flex;
+  height: 90px;
+  width: 16%;
+}
+
+div.fouthReading{
+  display: inline-flex;
+  height: 90px;
+  width: 16%;
+}
+
+div.fivethReading{
+  display: inline-flex;
+  height: 90px;
+  width: 16%;
+}
+
+div.sixthReading{
+  display: inline-flex;
+  height: 90px;
+  width: 16%;
+}
+
+div.titleSingleReading{
+  width: 100%;
+  height: 40px;
+}
+
+div.graphs{
+  background-color: #ffffff;
+  border-style: groove;
+  border-radius: 5px;
+  width: 1195px;
+}
+
+div.container {
+  display: inline-block;
+  min-width: 373px;
+  max-width: 373px;
+  min-height: 250px;
+  max-height: 250px;
+  padding: 10px;
+}
+
+div.bottom {
+    width: 100%;
+    height: 30px;
+    background-color: #000d1a;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+
+button.topBar{
+  background-color: #ffffff;
+  height: 30px;
+  width: 130px;
+  text-align: center;
+  line-height: 1.5em;
+  border-style: none;
+  font-family: 'Courier New', monospace;
+  font-weight: 1000;
+  font-size: 20px;
+}
+
+button.Relay {
+  background-color: #b3e2ff;
+  color: #ffffff;
+  width: 130px;
+  height: 60px;
+  border-style: none;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  font-weight: 1000;
+  font-size: 15px;
+}
+
+button#Relay1{
+  position: absolute;
+  top: 310px;
+  left: 550px;
+}
+
+button#Relay2{
+  position: absolute;
+  top: 310px;
+  left: 155px;
+}
+
+button#Relay3{
+  position: absolute;
+  top: 70px;
+  left: 1015px;
+}
+
+button#Relay4{
+  position: absolute;
+  top: 95px;
+  left: 448px;
+}
+
+button#Relay5{
+  position: absolute;
+  top: 95px;
+  left: 670px;
+}
+
+button#Relay6{
+  position: absolute;
+  top: 95px;
+  left: 290px;
+}
+
+/*settings page*/
+
+div.mainSettingsPage {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  margin: -100px 0 0 -600px;
+  width: 1200px;
+  height: 800px;
+}
+
+div.leftSettingsPage{
+  background-color: #ffffff;
+  display: inline-block;
+  width: 240px;
+  height: 100%;
+  border-style: groove;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+div.buttonSettingsPage{
+  margin-top: 20px;
+  height: 100%;
+}
+
+div.rightSettingsPage{
+  background-color: #ffffff;
+  display: inline-block;
+  width: 934px;
+  height: 100%;
+  border-style: groove;
+  border-radius: 5px;
+}
+
+button.buttonSettingsPage{
+  width: 90%;
+  height: 40px;
+  margin-left: 15px;
+  background-color: #ffffff;
+  text-align: left;
+  line-height: 1.5em;
+  border-style: none;
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+button.blackButton{
+  height: 490px;
+  width: 100%;
+  border-style: none;
+  background-color: #ffffff;
+}
+
+p.titleSettingPage{
+  line-height: 1.5em;
+  border-style: none;
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  font-size: 18px;
+  margin-left: 30px;
+}
+
+textarea.textSettingPage{
+  resize: none;
+  margin-left: 3.5%;
+  width: 92%;
+  height: 85%;
+}

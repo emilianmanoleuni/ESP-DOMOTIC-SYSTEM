@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.highcharts.com/stock/highstock.js"></script>
+  <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/stock/modules/accessibility.js"></script>
+  <script src="https://code.highcharts.com/modules/data.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <title>ESP Domotic System</title>
+
+</head>
+<body>
+  <h1>ESP Domotic System</h1>
+  <div class="topBar">
+    <button id="redirectHome" class="topBar">| Home |</button>
+    <button id="redirectSettings" class="topBar">|Settings|</button>
+  </div>
+  <div class="mainSettingsPage">
+    <div class="leftSettingsPage">
+      <div class="buttonSettingsPage">
+        <button id="logButton" class="buttonSettingsPage">Log</button>
+        <button id="database12vButton" class="buttonSettingsPage">Database 12V</button>
+        <button id="database5vButton" class="buttonSettingsPage">Database 5V</button>
+        <button id="databasePhotovoltaicButton" class="buttonSettingsPage">Database Photovoltaic</button>
+        <button id="databaseTemperaureButton" class="buttonSettingsPage">Database Temperature</button>
+        <button id="databaseLightButton" class="buttonSettingsPage">Database Light</button>
+        <button class="blackButton"></button>
+      </div>
+    </div>
+    <div class="rightSettingsPage">
+      <p id="titleSettingPage" class="titleSettingPage">/</p>
+      <textarea id="textSettingPage" class="textSettingPage"></textarea>
+    </div>
+  </div>
+  <div class="bottom">
+    <p class="bottom"> Embedded Software for the Internet of Things - 2023 / 2024 - III* Year
+  </div>
+</body>
+<script>
+//Top Bar Buttons
+document.getElementById("redirectHome").addEventListener("click", redirectHome);
+function redirectHome(){ window.location = "/";}
+document.getElementById("redirectSettings").addEventListener("click", redirectSettings);
+function redirectSettings(){ window.location = "settings.html";}
+
+//ButtonsLeftSettingsSelection
+let stopFlagLog = false;
+let stopFlagDatabase12v = false;
+let stopFlagDatabase5v = false;
+let stopFlagDatabasePhotovoltaic = false;
+let stopFlagDatabaseTemperature = false;
+let stopFlagDatabaseLight = false;
+let intervalId;
+
+document.getElementById("logButton").addEventListener("click", logButton);
+function logButton(){
+  stopFlagLog = false;
+  stopFlagDatabase12v = true;
+  stopFlagDatabase5v = true;
+  stopFlagDatabasePhotovoltaic = true;
+  stopFlagDatabaseTemperature = true;
+  stopFlagDatabaseLight = true;
+  document.getElementById("titleSettingPage").textContent="Log";
+  clearInterval(intervalId); // Interrompi l'intervallo attivo
+  fetchData('http://192.168.1.192/log.txt', stopFlagLog);
+}
+
+document.getElementById("database12vButton").addEventListener("click", database12vButton);
+function database12vButton(){
+  stopFlagLog = true;
+  stopFlagDatabase12v = false;
+  stopFlagDatabase5v = true;
+  stopFlagDatabasePhotovoltaic = true;
+  stopFlagDatabaseTemperature = true;
+  stopFlagDatabaseLight = true;
+  document.getElementById("titleSettingPage").textContent="Database 12V";
+  clearInterval(intervalId);
+  fetchData('http://192.168.1.192/data12v.csv', stopFlagDatabase12v);
+}
+
+document.getElementById("database5vButton").addEventListener("click", database5vButton);
+function database5vButton(){
+  stopFlagLog = true;
+  stopFlagDatabase12v = true;
+  stopFlagDatabase5v = false;
+  stopFlagDatabasePhotovoltaic = true;
+  stopFlagDatabaseTemperature = true;
+  stopFlagDatabaseLight = true;
+  document.getElementById("titleSettingPage").textContent="Database 5V";
+  clearInterval(intervalId);
+  fetchData('http://192.168.1.192/data5v.csv', stopFlagDatabase5v);
+}
+
+document.getElementById("databasePhotovoltaicButton").addEventListener("click", databasePhotovoltaicButton);
+function databasePhotovoltaicButton(){
+  stopFlagLog = true;
+  stopFlagDatabase12v = true;
+  stopFlagDatabase5v = true;
+  stopFlagDatabasePhotovoltaic = false;
+  stopFlagDatabaseTemperature = true;
+  stopFlagDatabaseLight = true;
+  document.getElementById("titleSettingPage").textContent="Database Photovoltaic";
+  clearInterval(intervalId);
+  fetchData('http://192.168.1.192/dataPhotovoltaic.csv', stopFlagDatabasePhotovoltaic);
+}
+
+document.getElementById("databaseTemperaureButton").addEventListener("click", databaseTemperatureButton);
+function databaseTemperatureButton(){
+  stopFlagLog = true;
+  stopFlagDatabase12v = true;
+  stopFlagDatabase5v = true;
+  stopFlagDatabasePhotovoltaic = true;
+  stopFlagDatabaseTemperature = false;
+  stopFlagDatabaseLight = true;
+  document.getElementById("titleSettingPage").textContent="Database Temperature";
+  clearInterval(intervalId);
+  fetchData('http://192.168.1.192/dataTemperature.csv', stopFlagDatabaseTemperature);
+}
+
+document.getElementById("databaseLightButton").addEventListener("click", databaseLightButton);
+function databaseLightButton(){
+  stopFlagLog = true;
+  stopFlagDatabase12v = true;
+  stopFlagDatabase5v = true;
+  stopFlagDatabasePhotovoltaic = true;
+  stopFlagDatabaseTemperature = true;
+  stopFlagDatabaseLight = false;
+  document.getElementById("titleSettingPage").textContent="Database Light";
+  clearInterval(intervalId);
+  fetchData('http://192.168.1.192/dataLight.csv', stopFlagDatabaseLight);
+}
+
+async function fetchData(url, stopFlag) {
+  try {
+    const response = await fetch(url);
+    const text = await response.text();
+    document.getElementById("textSettingPage").textContent = text;
+    intervalId = setInterval(async function() {
+      if (!stopFlag) {
+        const response = await fetch(url);
+        const text = await response.text();
+        document.getElementById("textSettingPage").textContent = text;
+      } else {
+        clearInterval(intervalId);
+      }
+    }, 10000);
+  } catch (error) {
+    console.error('Errore durante il recupero dei dati:', error);
+  }
+}
+
+
+</script>
+</html>

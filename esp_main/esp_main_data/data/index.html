@@ -1,0 +1,565 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.highcharts.com/stock/highstock.js"></script>
+  <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/stock/modules/accessibility.js"></script>
+  <script src="https://code.highcharts.com/modules/data.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <title>ESP Domotic System</title>
+
+</head>
+<body>
+  <h1>ESP Domotic System</h1>
+  <div class="topBar">
+    <button id="redirectHome" class="topBar">| Home |</button>
+    <button id="redirectSettings" class="topBar">|Settings|</button>
+  </div>
+  <div class="main">
+    <div class="top">
+      <div class="topLeft">
+        <div class="topLeftHouseButtonsTitle">
+          <h2>Lamps</h2>
+        </div>
+        <div class="topLeftHouseButtons">
+          <button class="Relay" id="Relay1" onclick="relayFunction(1)">Leaving Room</button>
+          <button class="Relay" id="Relay2" onclick="relayFunction(2)">Kitchen</button>
+          <button class="Relay" id="Relay4" onclick="relayFunction(4)">Hallway</button>
+          <button class="Relay" id="Relay5" onclick="relayFunction(5)">Bedroom</button>
+          <button class="Relay" id="Relay6" onclick="relayFunction(6)">Bathroom</button>
+        </div>
+    </div>
+    <div class="topRight">
+      <div class="topRightButtonFirstTitle">
+        <h2>Air</h2>
+      </div>
+      <div class="topRightButtonFirst">
+        <button class="Relay" id="Relay3" onclick="relayFunction(3)">Fan</button>
+      </div>
+      </div>
+    </div>
+    <div class="readings">
+      <h2>Readings</h2>
+      <div class="firstReading">
+        <div class="titleSingleReading">
+          <h3>Source 12V</h3>
+          <p id="firstReadingText" class="readings">Nan V</p>
+        </div>
+      </div>
+      <div class="secondReading">
+        <div class="titleSingleReading">
+          <h3>Source 5V</h3>
+          <p id="secondReadingText" class="readings">Nan V</p>
+        </div>
+      </div>
+      <div class="thirdReading">
+        <div class="titleSingleReading">
+          <h3>Source Photovoltaic</h3>
+          <p id="thirdReadingText" class="readings">Nan V</p>
+        </div>
+      </div>
+      <div class="fouthReading">
+        <div class="titleSingleReading">
+          <h3>Temperature</h3>
+          <p id="fouthReadingText" class="readings">Nan °C</p>
+        </div>
+      </div>
+      <div class="fivethReading">
+        <div class="titleSingleReading">
+          <h3>Light</h3>
+          <p id="fivethReadingText" class="readings">Nan %</p>
+        </div>
+      </div>
+      <div class="sixthReading">
+        <div class="titleSingleReading">
+          <h3>NaN</h3>
+          <p id="sixthReadingText" class="readings">Nan</p>
+        </div>
+      </div>
+    </div>
+    <div class="graphs">
+      <h2>Graphs</h2>
+      <div id="source12v-chart" class="container"></div>
+      <div id="source5v-chart" class="container"></div>
+      <div id="photovoltaictension-chart" class="container"></div>
+      <div id="temperature-chart" class="container"></div>
+      <div id="light-chart" class="container"></div>
+      <div id="nan-chart" class="container"></div>
+    </div>
+  </div>
+  <div class="bottom">
+    <p class="bottom"> Embedded Software for the Internet of Things - 2023 / 2024 - III* Year
+  </div>
+</body>
+<script>
+//Top Bar Buttons
+document.getElementById("redirectHome").addEventListener("click", redirectHome);
+function redirectHome(){ window.location = "/";}
+document.getElementById("redirectSettings").addEventListener("click", redirectSettings);
+function redirectSettings(){ window.location = "settings.html";}
+
+//Buttons Relay Home
+relays = [0,0,0,0,0,0];
+function relayFunction(n){
+  var xhttp = new XMLHttpRequest();
+  var id = "Relay"+n.toString();
+  if(relays[n]==0){
+      xhttp.open("GET", "/relay"+n+"/on", true);
+      relays[n] = 1;
+      document.getElementById(id).style.backgroundColor = "#2caffe";
+      document.getElementById(id).style.boxShadow = "0px 0px 10px 10px rgb(44, 175, 254)";
+  }else{
+      xhttp.open("GET", "/relay"+n+"/off", true);
+      relays[n] = 0;
+      document.getElementById(id).style.backgroundColor = "#b3e2ff";
+      document.getElementById(id).style.boxShadow = "0px 0px 0px 0px";
+  }
+  xhttp.send();
+}
+
+//Get data   -----------------------------> NOW ON ESP32 Deprecated
+/*setInterval( function(){
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "/read12V", true);
+  xhttp.send();
+}, 10000);
+
+setInterval( function(){
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "/read5V", true);
+  xhttp.send();
+}, 10000);
+*/
+
+(async () => {
+setInterval( function(){
+  var lastData12v;
+  var lastData5v;
+  var lastDataPhotovoltaic;
+  var lastDataTemperature;
+  var lastDataLight;
+
+  fetch('http://192.168.1.192/lastData12v.txt')
+    .then(response => response.text())
+    .then(text => {lastData12v=text
+      document.getElementById("firstReadingText").textContent=lastData12v+" V";
+    });
+  fetch('http://192.168.1.192/lastData5v.txt')
+    .then(response => response.text())
+    .then(text => {lastData5v=text
+      document.getElementById("secondReadingText").textContent=lastData5v+" V";
+    });
+  fetch('http://192.168.1.192/lastPhotovoltaic.txt')
+    .then(response => response.text())
+    .then(text => {lastDataPhotovoltaic=text
+      document.getElementById("thirdReadingText").textContent=lastDataPhotovoltaic+" V";
+    });
+  fetch('http://192.168.1.192/lastTemperature.txt')
+    .then(response => response.text())
+    .then(text => {lastTemperature=text
+      document.getElementById("fouthReadingText").textContent=lastTemperature+" °C";
+    });
+   fetch('http://192.168.1.192/lastLight.txt')
+    .then(response => response.text())
+    .then(text => {lastLight=text
+     document.getElementById("fivethReadingText").textContent=lastLight+" lx";
+    });
+}, 5000);
+})();
+
+//Graphs
+(async () => {
+    const chart = Highcharts.stockChart('source12v-chart', {
+        chart: {
+            height: 400
+        },
+
+        title: {
+            text: 'Source 12V'
+        },
+
+        subtitle: {
+            text: 'Click small/large buttons or change window size to test responsiveness'
+        },
+
+        rangeSelector: {
+            selected: 1
+        },
+
+        data: {
+            csvURL: 'http://192.168.1.192/data12v.csv'
+        },
+
+        series: [{
+            name: 'Voltage',
+            //data: data,
+            type: 'area',
+            threshold: null,
+            tooltip: {
+                valueDecimals: 2
+            }
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    chart: {
+                        height: 300
+                    },
+                    subtitle: {
+                        text: null
+                    },
+                    navigator: {
+                        enabled: false
+                    }
+                }
+            }]
+        }
+    });
+
+    document.getElementById('small').addEventListener('click', () => {
+        chart.setSize(400);
+    });
+
+    document.getElementById('large').addEventListener('click', () => {
+        chart.setSize(800);
+    });
+
+    document.getElementById('auto').addEventListener('click', () => {
+        chart.setSize(null);
+    })
+})();
+
+(async () => {
+    const chart = Highcharts.stockChart('source5v-chart', {
+        chart: {
+            height: 400
+        },
+
+        title: {
+            text: 'Source 5V'
+        },
+
+        subtitle: {
+            text: 'Click small/large buttons or change window size to test responsiveness'
+        },
+
+        rangeSelector: {
+            selected: 1
+        },
+
+        data: {
+            csvURL: 'http://192.168.1.192/data5v.csv'
+        },
+
+        series: [{
+            name: 'Voltage',
+            type: 'area',
+            threshold: null,
+            tooltip: {
+                valueDecimals: 2
+            }
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    chart: {
+                        height: 300
+                    },
+                    subtitle: {
+                        text: null
+                    },
+                    navigator: {
+                        enabled: false
+                    }
+                }
+            }]
+        }
+    });
+
+    document.getElementById('small').addEventListener('click', () => {
+        chart.setSize(400);
+    });
+
+    document.getElementById('large').addEventListener('click', () => {
+        chart.setSize(800);
+    });
+
+    document.getElementById('auto').addEventListener('click', () => {
+        chart.setSize(null);
+    });
+})();
+
+(async () => {
+    const chart = Highcharts.stockChart('photovoltaictension-chart', {
+        chart: {
+            height: 400
+        },
+
+        title: {
+            text: 'Source Photovoltaic'
+        },
+
+        subtitle: {
+            text: 'Click small/large buttons or change window size to test responsiveness'
+        },
+
+        rangeSelector: {
+            selected: 1
+        },
+
+        data: {
+            csvURL: 'http://192.168.1.192/dataPhotovoltaic.csv'
+        },
+
+        series: [{
+            name: 'Voltage',
+            //data: data,
+            type: 'area',
+            threshold: null,
+            tooltip: {
+                valueDecimals: 2
+            }
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    chart: {
+                        height: 300
+                    },
+                    subtitle: {
+                        text: null
+                    },
+                    navigator: {
+                        enabled: false
+                    }
+                }
+            }]
+        }
+    });
+
+    document.getElementById('small').addEventListener('click', () => {
+        chart.setSize(400);
+    });
+
+    document.getElementById('large').addEventListener('click', () => {
+        chart.setSize(800);
+    });
+
+    document.getElementById('auto').addEventListener('click', () => {
+        chart.setSize(null);
+    });
+})();
+
+(async () => {
+    const chart = Highcharts.stockChart('temperature-chart', {
+        chart: {
+            height: 400
+        },
+
+        title: {
+            text: 'Temperature'
+        },
+
+        subtitle: {
+            text: 'Click small/large buttons or change window size to test responsiveness'
+        },
+
+        rangeSelector: {
+            selected: 1
+        },
+
+        data: {
+            csvURL: 'http://192.168.1.192/dataTemperature.csv'
+        },
+
+        series: [{
+            name: '°C',
+            //data: data,
+            type: 'area',
+            threshold: null,
+            tooltip: {
+                valueDecimals: 2
+            }
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    chart: {
+                        height: 300
+                    },
+                    subtitle: {
+                        text: null
+                    },
+                    navigator: {
+                        enabled: false
+                    }
+                }
+            }]
+        }
+    });
+
+    document.getElementById('small').addEventListener('click', () => {
+        chart.setSize(400);
+    });
+
+    document.getElementById('large').addEventListener('click', () => {
+        chart.setSize(800);
+    });
+
+    document.getElementById('auto').addEventListener('click', () => {
+        chart.setSize(null);
+    });
+})();
+
+(async () => {
+  const chart = Highcharts.stockChart('light-chart', {
+        chart: {
+            height: 400
+        },
+
+        title: {
+            text: 'Light'
+        },
+
+        subtitle: {
+            text: 'Click small/large buttons or change window size to test responsiveness'
+        },
+
+        rangeSelector: {
+            selected: 1
+        },
+
+        data: {
+            csvURL: 'http://192.168.1.192/dataLight.csv'
+        },
+
+        series: [{
+            name: '%',
+            //data: data,
+            type: 'area',
+            threshold: null,
+            tooltip: {
+                valueDecimals: 2
+            }
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    chart: {
+                        height: 300
+                    },
+                    subtitle: {
+                        text: null
+                    },
+                    navigator: {
+                        enabled: false
+                    }
+                }
+            }]
+        }
+    });
+
+    document.getElementById('small').addEventListener('click', () => {
+        chart.setSize(400);
+    });
+
+    document.getElementById('large').addEventListener('click', () => {
+        chart.setSize(800);
+    });
+
+    document.getElementById('auto').addEventListener('click', () => {
+        chart.setSize(null);
+    });
+})();
+
+(async () => {
+const data = await fetch(
+        'https://demo-live-data.highcharts.com/aapl-c.json'
+    ).then(response => response.json());
+
+    const chart = Highcharts.stockChart('nan-chart', {
+        chart: {
+            height: 400
+        },
+
+        title: {
+            text: 'Nan'
+        },
+
+        subtitle: {
+            text: 'Click small/large buttons or change window size to test responsiveness'
+        },
+
+        rangeSelector: {
+            selected: 1
+        },
+
+        series: [{
+            name: 'V',
+            data: data,
+            type: 'area',
+            threshold: null,
+            tooltip: {
+                valueDecimals: 2
+            }
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    chart: {
+                        height: 300
+                    },
+                    subtitle: {
+                        text: null
+                    },
+                    navigator: {
+                        enabled: false
+                    }
+                }
+            }]
+        }
+    });
+
+    document.getElementById('small').addEventListener('click', () => {
+        chart.setSize(400);
+    });
+
+    document.getElementById('large').addEventListener('click', () => {
+        chart.setSize(800);
+    });
+
+    document.getElementById('auto').addEventListener('click', () => {
+        chart.setSize(null);
+    });
+})();
+
+</script>
+</html>
