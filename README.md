@@ -66,7 +66,7 @@ For the second ESP:
 > Be sure that the GoogleServerAPI directory is in the same directory as the project and don't rename any file
 
 When you have uploaded and verified both projects, you can upload them on each board by clicking the arrow in Arduino IDE.
-To upload the data directory into the memory of the main ESP, you need to use a file system. In this case we use the integrated LittleFS ([how to install](https://randomnerdtutorials.com/esp32-littlefs-arduino-ide/)).
+To upload the data directory into the memory of the main ESP, you need to use a file system. In this case we use the integrated LittleFS.
 <p><img src="screenshoot_web_page/first_littlefs.jpg" width = "300px"></p>
 <p><img src="screenshoot_web_page/second_littlefs.jpg" width = "300px"></p>
 
