@@ -68,7 +68,7 @@ For the second ESP:
 
 > Available rooms: LIVING ROOM, KITCHEN, BATHROOM, BEDROOM
 
-Just click the button, say the desired command and leave the button. The command will execute in a few seconds
+Just click the button and say the desired command. The command will execute in a few seconds
 
 ## Contributors
 
