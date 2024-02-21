@@ -81,7 +81,7 @@ When you have uploaded and verified both projects, you can upload them on each b
 
 > Available rooms: LIVING ROOM, KITCHEN, BATHROOM, BEDROOM, HALLWAY.
 
-Just click the button and say the desired command. The command will execute in a few seconds
+Just click the button and say the desired command. The command will execute in few seconds.
 
 ## Contributors
 
