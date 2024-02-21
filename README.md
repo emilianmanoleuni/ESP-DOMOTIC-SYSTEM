@@ -22,7 +22,8 @@ ESP Domotic System is a simple domotic system to control sensors and domotic ite
  * 12V fan
 
 ### Software requirements
-You will need [Code Composer Studio](https://www.ti.com/tool/CCSTUDIO) installed with [DriverLib](https://www.ti.com/tool/MSPDRIVERLIB) to compile and run the code on the MSP. You will also need [Arduino IDE 2.x](https://www.arduino.cc/en/software) to run the ESPs. 
+You will need [Code Composer Studio](https://www.ti.com/tool/CCSTUDIO) installed with [DriverLib](https://www.ti.com/tool/MSPDRIVERLIB) to compile and run the code on the MSP. You will also need [Arduino IDE 1.x](https://www.arduino.cc/en/software) to run the ESPs. 
+>Using the 2.x version of the IDE may cause some bugs with the file system
 
 ## Project Layout
 
@@ -52,20 +53,20 @@ Once you have done that you can right-click on the main project folder and click
 
 
 For the main ESP: 
-1. Open Arduino IDE 2.x
+1. Open Arduino IDE 1.x
 2. Select the board "ESP32 dev module"
 3. Go to **File** > **Open** and select the .ino file
 
 
 For the second ESP: 
-1. Open Arduino IDE2.x
+1. Open Arduino IDE 1.x
 2. Select the board "ESP32 dev module"
 3. Go to **File** > **Open** and select the .ino file
 
 > Be sure that the GoogleServerAPI directory is in the same directory as the project and don't rename any file
 
 When you have uploaded and verified both projects, you can upload them on each board by clicking the arrow in Arduino IDE.
-To upload the data directory into the memory of the main ESP, you need to use a file system. In this case we use the integrated LittleFS.
+To upload the data directory into the memory of the main ESP, you need to use a file system. In this case we use the integrated LittleFS ([how to install](https://randomnerdtutorials.com/esp32-littlefs-arduino-ide/)).
 <p><img src="screenshoot_web_page/first_littlefs.jpg" width = "300px"></p>
 <p><img src="screenshoot_web_page/second_littlefs.jpg" width = "300px"></p>
 
