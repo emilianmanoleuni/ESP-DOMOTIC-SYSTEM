@@ -13,8 +13,13 @@ ESP Domotic System is a simple domotic system to control sensors and domotic ite
  * Texas Instruments MSP432P401R with BoosterPack
  * 2 x ESP32
  * Relay module
- * Matrix Board and voltage divider
+ * Matrix Board
+ * Buck converter and resistance
  * INMP441 microphone
+ * 5 x LED stripes 12V
+ * 12V power supply
+ * Solar panel
+ * 12V fan
 
 ### Software requirements
 You will need [Code Composer Studio](https://www.ti.com/tool/CCSTUDIO) installed with [DriverLib](https://www.ti.com/tool/MSPDRIVERLIB) to compile and run the code on the MSP. You will also need [Arduino IDE 2.x](https://www.arduino.cc/en/software) to run the ESPs. 
@@ -60,7 +65,9 @@ For the second ESP:
 > Be sure that the GoogleServerAPI directory is in the same directory as the project and don't rename any file
 
 ## User Guide 
- // how to connect to the web app
+ After the connections are ready and the boards are powered, wait that the blue led on the main ESP turn on. This means that the server is ready and you can proceed accessing the web app.
+ To do so, open the Arduino console and read the main ESP IP address, copy it into your browser (pay attention to be connected at the same WiFi of the board) and this page will show up:
+ <p align = "center"> <img src = ""></p>
 
  You can also use a various set of voice command, composed in this way:
  * If you want to turn or/off lights the command is "_ROOM_ + LIGHTS + ON/OFF"
