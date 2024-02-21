@@ -74,6 +74,8 @@ To upload the data directory into the memory of the main ESP, you need to use a 
  To do so, open the Arduino console and read the main ESP IP address, copy it into your browser (pay attention to be connected at the same WiFi of the board) and this page will show up:
  <p align = "center"> <img src = "screenshoot_web_page/screenshoot_home_top.png" width = "500px"></p>
 
+ >The IP is assigned by the modem after you connect the ESP to it, modifying the ssid and password variables in ESP_Domotic.ino
+
  You can use those buttons to turn on/off lights and fan. When the blue is bright it means the power is on, otherwise it's off. Scrolling down you will see the graphs, that monitors all the sensors and power supplies of the sistem.
 
  <p align = "center"> <img src = "screenshoot_web_page/screenshoot_home_bottom_graphs.png" width = "500px"> </p>
