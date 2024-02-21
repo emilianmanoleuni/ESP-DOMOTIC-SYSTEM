@@ -64,6 +64,8 @@ For the second ESP:
 
 > Be sure that the GoogleServerAPI directory is in the same directory as the project and don't rename any file
 
+When you have uploaded and verified both projects, you can upload them on each board by clicking the arrow in Arduino IDE.
+
 ## User Guide 
  After the connections are ready and the boards are powered, wait that the blue led on the main ESP turn on. This means that the server is ready and you can proceed accessing the web app.
  To do so, open the Arduino console and read the main ESP IP address, copy it into your browser (pay attention to be connected at the same WiFi of the board) and this page will show up:
