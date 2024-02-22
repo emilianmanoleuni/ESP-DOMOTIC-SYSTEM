@@ -229,6 +229,7 @@ void setup(){
 
 
   //Voltages //DEPRECATED no more client request
+  /*
   server.on("/read12V", HTTP_GET, [](AsyncWebServerRequest *request){
     float readed12V = read12V();
     request->send(200, "text/plain", String(readed12V));
@@ -263,7 +264,7 @@ void setup(){
     //LastRead
     writeFile(LittleFS, "/lastData5v.txt", (String(readed5V)).c_str());
   });
-
+  */
 
 
 
